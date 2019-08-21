@@ -21,10 +21,10 @@ The `search_engine.py` script collects tweet ids. If you know a tweet's id numbe
 - tweepy (3.5.0)
   - `pip3 install tweepy`
 
-## Running the scraper
+## Running the search engine
 
-- open up `scrape.py` and edit the user, start, and end variables (and save the file)
-- run `python3 scrape.py`
+- open up `search_engine.py` and edit the user, start, and end variables (and save the file)
+- run `python3 search_engine.py`
 - you'll see a browser pop up and output in the terminal
 - do some fun other task until it finishes
 - once it's done, it outputs all the tweet ids it found into `all_ids.json`
