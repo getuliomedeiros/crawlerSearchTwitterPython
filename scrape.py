@@ -5,12 +5,12 @@ from time import sleep
 import json
 import datetime
 
-#palavrasChave = ['%23Tsunami13Agosto','%23TiraAMãoDoMeuIF','%23SOSIF','%23TsunamiDaEducação']
-palavrasChave = ['%23IFPB','%23IFRN']
+#word_key = ['%23Tsunami13Agosto','%23TiraAMãoDoMeuIF','%23SOSIF','%23TsunamiDaEducação']
+word_key = ['%23IFPB','%23IFRN']
 
-f = open('dia', 'w')
+f = open('day_write', 'w')
 
-for i in palavrasChave:
+for i in word_key:
 
     start = datetime.datetime(2019,8,16)
     # edit these three variables
@@ -20,7 +20,7 @@ for i in palavrasChave:
     # only edit these if you're having problems
     delay = 1  # time to wait on each page load before reading the page
     driver = webdriver.Firefox()  # options are Chrome() Firefox() Safari()
-    novoArquivo = open(f'{user}.json', 'w')
+    new_archive = open(f'{user}.json', 'w')
 
     # don't mess with this stuff
     twitter_ids_filename = f'{user}.json'
@@ -30,11 +30,11 @@ for i in palavrasChave:
     user = user.lower()
     ids = []
 
-    def escrever_dia(date):
-        dia = date.strftime('%m/%d/%Y')
-        arquivo = open('dia', 'w+')
-        arquivo.write(dia)
-        arquivo.close()
+    def write_day(date):
+        day_write = date.strftime('%m/%d/%Y')
+        archive = open('day_write', 'w+')
+        archive.write(day_write)
+        archive.close()
 
     def format_day(date):
         day = '0' + str(date.day) if len(str(date.day)) == 1 else str(date.day)
@@ -51,11 +51,11 @@ for i in palavrasChave:
         return date + datetime.timedelta(days=i)
 
     for day in range(days):
-        d1 = format_day(increment_day(start, 0))
-        d2 = format_day(increment_day(start, 1))
-        url = form_url(d1, d2)
+        day1 = format_day(increment_day(start, 0))
+        day2 = format_day(increment_day(start, 1))
+        url = form_url(day1, day2)
         print(url)
-        print(d1)
+        print(day1)
         driver.get(url)
         sleep(delay)
 
@@ -101,9 +101,9 @@ for i in palavrasChave:
             json.dump(data_to_write, outfile)
         ids = []
         start = increment_day(start, 1)
-        escrever_dia(start)
+        write_day(start)
 
-    novoArquivo.close()
+    new_archive.close()
     driver.close()
 
 print('all done here')
