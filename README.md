@@ -1,4 +1,4 @@
-## Twitter Scraper
+## Crawler Search Twitter in Python
 
 Twitter makes it hard to get all of a user's tweets (assuming they have more than 3200). This is a way to get around that using Python, Selenium, and Tweepy.
 
