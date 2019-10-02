@@ -5,17 +5,22 @@ from time import sleep
 import json
 import datetime
 
-#word_key = ['%23Tsunami13Agosto','%23TiraAMãoDoMeuIF','%23SOSIF','%23TsunamiDaEducação']
-word_key = ['%23IFPB','%23IFRN']
+
+fileWords = open("word_keys.txt", "r") 
+word_key = fileWords.readlines()
+
+#word_key = ['%23IFPB','%23IFRN']
 
 f = open('day_write', 'w')
 
 for i in word_key:
+    
+    i = i.rstrip()
 
-    start = datetime.datetime(2019,8,16)
+    start = datetime.datetime(2019,8,14)
     # edit these three variables
     user = f'{i}'
-    end = datetime.datetime(2019, 8, 21)  # year, month, day
+    end = datetime.datetime(2019, 8, 16)  # year, month, day
     print(start)
     # only edit these if you're having problems
     delay = 1  # time to wait on each page load before reading the page
@@ -35,6 +40,7 @@ for i in word_key:
         archive = open('day_write', 'w+')
         archive.write(day_write)
         archive.close()
+        f.close()
 
     def format_day(date):
         day = '0' + str(date.day) if len(str(date.day)) == 1 else str(date.day)

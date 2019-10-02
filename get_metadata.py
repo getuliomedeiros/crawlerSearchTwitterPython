@@ -9,9 +9,13 @@ from tweepy import TweepError
 from time import sleep
 
 # CHANGE THIS TO THE USER YOU WANT
-word_key = ['%23IFPB','%23IFRN']
+fileWords = open("word_keys.txt", "r") 
+word_key = fileWords.readlines()
 
 for i in word_key:
+
+    i = i.rstrip()
+
     user = f'{i}'
 
     with open('api_keys.json') as f:
