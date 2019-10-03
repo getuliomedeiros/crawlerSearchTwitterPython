@@ -5,7 +5,6 @@ from time import sleep
 import json
 import datetime
 
-
 fileWords = open("word_keys.txt", "r") 
 word_key = fileWords.readlines()
 
@@ -50,7 +49,7 @@ for i in word_key:
         p1 = 'https://twitter.com/search?f=tweets&vertical=default&q='
         p2 =  user + '%20since%3A' + since + '%20until%3A' + until + 'include%3Aretweets&src=typd'
         return p1 + p2
-
+date
     def increment_day(date, i):
         return date + datetime.timedelta(days=i)
 
