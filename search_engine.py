@@ -9,8 +9,6 @@ import datetime
 fileWords = open("word_keys.txt", "r") 
 word_key = fileWords.readlines()
 
-#word_key = ['%23IFPB','%23IFRN']
-
 f = open('day_write', 'w')
 
 for i in word_key:
