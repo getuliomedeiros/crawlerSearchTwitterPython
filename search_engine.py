@@ -5,8 +5,11 @@ from time import sleep
 import json
 import datetime
 
+
 fileWords = open("word_keys.txt", "r") 
 word_key = fileWords.readlines()
+
+#word_key = ['%23IFPB','%23IFRN']
 
 f = open('day_write', 'w')
 
@@ -14,10 +17,10 @@ for i in word_key:
     
     i = i.rstrip()
 
-    start = datetime.datetime(2019,8,14)
+    start = datetime.datetime(2019,10,1)
     # edit these three variables
     user = f'{i}'
-    end = datetime.datetime(2019, 8, 16)  # year, month, day
+    end = datetime.datetime(2019, 10, 5)  # year, month, day
     print(start)
     # only edit these if you're having problems
     delay = 1  # time to wait on each page load before reading the page
@@ -49,7 +52,7 @@ for i in word_key:
         p1 = 'https://twitter.com/search?f=tweets&vertical=default&q='
         p2 =  user + '%20since%3A' + since + '%20until%3A' + until + 'include%3Aretweets&src=typd'
         return p1 + p2
-date
+
     def increment_day(date, i):
         return date + datetime.timedelta(days=i)
 
@@ -108,5 +111,6 @@ date
 
     new_archive.close()
     driver.close()
+    print('---------------------------------------------------------------')
 
 print('all done here')
