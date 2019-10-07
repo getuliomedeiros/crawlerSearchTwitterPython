@@ -11,16 +11,16 @@ word_key = fileWords.readlines()
 
 #word_key = ['%23IFPB','%23IFRN']
 
-f = open('day_write', 'w')
+f = open('day_write', 'a')
 
 for i in word_key:
     
     i = i.rstrip()
 
-    start = datetime.datetime(2019,10,1)
+    start = datetime.datetime(2019,5,15)
     # edit these three variables
     user = f'{i}'
-    end = datetime.datetime(2019, 10, 5)  # year, month, day
+    end = datetime.datetime(2019, 5, 17)  # year, month, day
     print(start)
     # only edit these if you're having problems
     delay = 1  # time to wait on each page load before reading the page
@@ -37,8 +37,8 @@ for i in word_key:
 
     def write_day(date):
         day_write = date.strftime('%m/%d/%Y')
-        archive = open('day_write', 'w+')
-        archive.write(day_write)
+        archive = open('day_write', 'a')
+        archive.write(f"{day_write} - from {start} to {end} \n")
         archive.close()
         f.close()
 
@@ -109,7 +109,7 @@ for i in word_key:
         start = increment_day(start, 1)
         write_day(start)
 
-    new_archive.close()
+        new_archive.close()
     driver.close()
     print('---------------------------------------------------------------')
 
