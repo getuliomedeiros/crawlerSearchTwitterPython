@@ -32,7 +32,7 @@ for i in word_key:
     with open(f'{i}.json') as f:
         ids = json.load(f)
 
-    print('total ids: {}'.format(len(ids)))
+    print('total ids: {} of {}'.format(len(ids),i))
 
     all_data = []
     start = 0
@@ -43,7 +43,7 @@ for i in word_key:
     for go in range(i):
         print('currently getting {} - {}'.format(start, end))
         sleep(6)  # needed to prevent hitting API rate limit
-        id_batch = ids[start:end]
+        id_batch = ids[start:end:1]
         start += 100
         end += 100
         tweets = api.statuses_lookup(id_batch)
@@ -94,7 +94,8 @@ for i in word_key:
         data = json.load(master_file)
         fields = ["favorite_count", "source", "text", "in_reply_to_screen_name", "is_retweet", "created_at", "retweet_count", "id_str"]
         print('creating CSV version of minimized json master file')
-        f = csv.writer(open('{}.csv'.format(user), 'w'))
+        f = csv.writer(open('{}.csv'.format(user), 'w', encoding="utf-8"))
         f.writerow(fields)
         for x in data:
             f.writerow([x["favorite_count"], x["source"], x["text"], x["in_reply_to_screen_name"], x["is_retweet"], x["created_at"], x["retweet_count"], x["id_str"]])
+    print('---------------------------------------------------------------')
