@@ -46,7 +46,7 @@ for i in word_key:
         id_batch = ids[start:end:1]
         start += 100
         end += 100
-        tweets = api.statuses_lookup(id_batch)
+        tweets = api.statuses_lookup(id_batch, tweet_mode='extended')
         for tweet in tweets:
             all_data.append(dict(tweet._json))
 
@@ -76,7 +76,7 @@ for i in word_key:
         for entry in data:
             t = {
                 "created_at": entry["created_at"],
-                "text": entry["text"],
+                "text": entry["full_text"],
                 "in_reply_to_screen_name": entry["in_reply_to_screen_name"],
                 "retweet_count": entry["retweet_count"],
                 "favorite_count": entry["favorite_count"],
@@ -87,7 +87,7 @@ for i in word_key:
             results.append(t)
 
     print('creating minimized json master file')
-    with open(output_file_short, 'w') as outfile:
+    with open(output_file_short, 'w', encoding="utf-8") as outfile:
         json.dump(results, outfile)
 
     with open(output_file_short) as master_file:
