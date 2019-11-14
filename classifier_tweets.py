@@ -17,11 +17,8 @@ dataset = pd.read_csv('./tagsClassificadas.csv', encoding='utf-8')
 dataset.count()
 
 dataset[dataset.Voto == 0].count()
-
 dataset[dataset.Voto == 1].count()
-
 dataset[dataset.Voto == -1].count()
-
 dataset.head()
 
 tweets = dataset["text"].values.astype('U')
@@ -33,15 +30,18 @@ classes
 vectorizer = CountVectorizer(analyzer = "word")
 freq_tweets = vectorizer.fit_transform(tweets)
 
-modelo = MultinomialNB(alpha=1.0, class_prior=None, fit_prior=True)
+vectorizer = CountVectorizer(analyzer = "word")
+freq_tweets = vectorizer.fit_transform(tweets)
+
+modelo = MultinomialNB()
 modelo.fit(freq_tweets, classes)
 
 testes = ["Esse governo está no início, vamos ver o que vai dar",
-          "Polícia só não é bem-vinda onde acontecem crimes (estudantes reclamam por sofrer estupro em universidades);",
-          "O estado de Minas Gerais decretou calamidade financeira!!!",
-          "A segurança desse país está deixando a desejar",
-          "É um desgoverno literalmente contra a educação!! Vergonhoso!! ",
-          "Tbm com a presença do PT, PSOL, MST E SINDICATOS... FALTOU SÓ OS AMIGOS DAS FACÇÕES."]
+        "Estou muito feliz com o governo de São Paulo esse ano",
+        "O estado de Minas Gerais decretou calamidade financeira!!!",
+        "A segurança desse país está deixando a desejar",
+        "O governador de Minas é do PT",
+        "O prefeito de São Paulo está fazendo um ótimo trabalho"]
 
 freq_testes = vectorizer.transform(testes)
 modelo.predict(freq_testes)
@@ -59,11 +59,10 @@ print(pd.crosstab(classes, resultados, rownames = ["Real"], colnames=["Predito"]
 vectorizer = CountVectorizer(ngram_range = (1, 2))
 freq_tweets = vectorizer.fit_transform(tweets)
 
-modelo = MultinomialNB(alpha=2.3, class_prior=None, fit_prior=True)
+modelo = MultinomialNB()
 modelo.fit(freq_tweets, classes)
 
 resultados = cross_val_predict(modelo, freq_tweets, classes, cv = 10)
-resultados
 
 metrics.accuracy_score(classes, resultados)
 
