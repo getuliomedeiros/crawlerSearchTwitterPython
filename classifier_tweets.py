@@ -13,7 +13,7 @@ from subprocess import check_output
 
 #for i in word_key:
 
-dataset = pd.read_csv('./tagsClassificadas.csv', encoding='utf-8')
+dataset = pd.read_csv('./classificados2.csv', encoding='utf-8')
 dataset.count()
 
 dataset[dataset.Voto == 0].count()
@@ -21,14 +21,8 @@ dataset[dataset.Voto == 1].count()
 dataset[dataset.Voto == -1].count()
 dataset.head()
 
-tweets = dataset["text"].values.astype('U')
-tweets
-
+tweets = dataset["Text"].values.astype('U')
 classes = dataset["Voto"].values.astype('U')
-classes
-
-vectorizer = CountVectorizer(analyzer = "word")
-freq_tweets = vectorizer.fit_transform(tweets)
 
 vectorizer = CountVectorizer(analyzer = "word")
 freq_tweets = vectorizer.fit_transform(tweets)
@@ -36,18 +30,7 @@ freq_tweets = vectorizer.fit_transform(tweets)
 modelo = MultinomialNB()
 modelo.fit(freq_tweets, classes)
 
-testes = ["Esse governo está no início, vamos ver o que vai dar",
-        "Estou muito feliz com o governo de São Paulo esse ano",
-        "O estado de Minas Gerais decretou calamidade financeira!!!",
-        "A segurança desse país está deixando a desejar",
-        "O governador de Minas é do PT",
-        "O prefeito de São Paulo está fazendo um ótimo trabalho"]
-
-freq_testes = vectorizer.transform(testes)
-modelo.predict(freq_testes)
-
 resultados = cross_val_predict(modelo, freq_tweets, classes, cv = 10)
-resultados
 
 metrics.accuracy_score(classes, resultados)
 
